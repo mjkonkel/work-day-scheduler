@@ -1,38 +1,74 @@
 // setting current day at top of page
 var todayDate = moment().format('dddd, MMMM Do');
 $('#currentDay').text(todayDate);
-console.log(todayDate)
-// setting and logging currrent hour
-var currentHour = moment().hour();
-console.log(currentHour)
+// console.log(todayDate)
 
-var hours = [9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+// getting currrent hour
+var currentHour = moment().hour();
+// console.log(currentHour)
+
+var container = $('.container')
+
+var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
 // function to create the rows
 function createRow() {
-    
+    console.log(typeof currentHour)
 
     for (var i = 0; i < hours.length; i++) {
-        $('.container').append($('<div><p>'+hours[i]+':00</p><textarea></textarea><button><i></i></button></div>'));
+        // console.log(i);
+        console.log(typeof hours[i]);
 
+
+        var div = $('<div>');
+        var p = $('<p>');
+        var textArea = $('<textarea>');
+        var btn = $('<button>');
         
-    }
-    // adding classes to the items within the rows
-    $('.container').children().addClass('row');
-    $('.container').children('div').children('p').addClass('hour');
-    // $('.container').children('div').children('textarea').addClass('past');
-    $('.container').children('div').children('button').addClass('saveBtn');
-    $('.container').children('div').children('button').children('i').addClass('fas fa-save');
+        div.attr('id', hours[i])
+        p.text(hours[i] + ':00')
+        p.addClass('hour col-md-1')
+        textArea.addClass('description col-md-10')
+        btn.append('<i>')
+        div.append(p)
+        div.append(textArea)
+        btn.on('click', saveText)
+        btn.addClass('saveBtn btn col-md-1')
+        btn.children('i').addClass('fas fa-save');
+        var colorClass;
 
-    
-    if (currentHour === 22 && i === 22) {
-        $("textarea").addClass('past');
+        // if statements to change the color with the current hour
+        if (hours[i] < currentHour) {
+            colorClass = "past"
 
+        }else if (hours[i] === currentHour) {
+            colorClass = "present"
+
+        }else{
+            colorClass = 'future'
+        }
+
+
+        div.append(btn)
+
+        // $('<div><p>'+hours[i]+':00</p><textarea class="'+colorClass+'"></textarea><button><i></i></button></div>')
+
+        $('.container').append(div);
     }
-    
+   
+    // // adding classes to the items within the rows
+    $('.container').children().addClass('row time-block ' + colorClass);
+
+}
+
+function saveText(e) {
+    console.log($(this).siblings('textarea').val())
+
+    var key = $(this).parent().attr('id');
+    var value = $(this).siblings('textarea').val()
+    localStorage.setItem(key, value)
 }
 
 
 
-
-window.onload = createRow();
+createRow();
