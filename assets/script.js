@@ -1,27 +1,29 @@
 // setting current day at top of page
 var todayDate = moment().format('dddd, MMMM Do');
 $('#currentDay').text(todayDate);
-// console.log(todayDate)
 
 // getting currrent hour
 var currentHour = moment().hour();
 console.log(currentHour)
 
+// the variable for the container that holds the rows
 var container = $('.container')
 
+// the array of the hours in the day
 var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 
 // function to create the rows
 function createRow() {
 
     for (var i = 0; i < hours.length; i++) {
-        // console.log(i);
 
+        // the variables for the items that are created within each row
         var div = $('<div>');
         var p = $('<p>');
         var textArea = $('<textarea>');
         var btn = $('<button>');
 
+        // adding classes and appending the elements within each row
         div.attr('id', hours[i])
         p.text(hours[i] + ':00')
         p.addClass('hour col-md-1')
@@ -32,14 +34,12 @@ function createRow() {
         btn.on('click', saveText)
         btn.addClass('saveBtn btn col-md-1')
         btn.children('i').addClass('fas fa-save');
-        var colorClass;
-
-
-
         div.append(btn);
+
         $('.container').append(div);
     }
 
+    // if statements to change the color of the rows depending on the current hour 
     if (hours[0] === 9 && currentHour < 9) {
         $('.container').children('#9').addClass('future');
     }
@@ -129,27 +129,13 @@ function createRow() {
     if (hours[8] === 17 && currentHour > 17) {
         $('.container').children('#17').addClass('past');
     }
-    // // adding classes to the items within the rows
+
+    // // adding classes to the rows within the container
     $('.container').children().addClass(' row time-block ');
 
 }
 
-// if statements to change the color with the current hour
-// if (hours[i] < currentHour) {
-//     colorClass = "past"
-
-// }else if (hours[i] === currentHour) {
-//     colorClass = "present"
-
-// }else{
-//     colorClass = 'present'
-// }
-
-
-// else{
-//      colorClass = 'present'
-// }
-
+// function for saving the contents of the textarea to local storage
 function saveText(e) {
     console.log($(this).siblings('textarea').val())
 
@@ -158,6 +144,5 @@ function saveText(e) {
     localStorage.setItem(key, value)
 }
 
-
-
+// function that creates the rows on load of the page
 createRow();
