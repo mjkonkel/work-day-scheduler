@@ -130,7 +130,7 @@ function createRow() {
         $('.container').children('#17').addClass('past');
     }
 
-    // // adding classes to the rows within the container
+    // adding classes to the rows within the container
     $('.container').children().addClass(' row time-block ');
 
 }
