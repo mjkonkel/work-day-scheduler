@@ -27,7 +27,7 @@ function createRow() {
         div.attr('id', hours[i])
         p.text(hours[i] + ':00')
         p.addClass('hour col-md-1')
-        textArea.addClass('description col-md-10')
+        textArea.addClass('col-md-10 description')
         btn.append('<i>')
         div.append(p)
         div.append(textArea)
@@ -140,9 +140,20 @@ function saveText(e) {
     console.log($(this).siblings('textarea').val())
 
     var key = $(this).parent().attr('id');
-    var value = $(this).siblings('textarea').val()
+    var value = $(this).siblings('.description').val()
     localStorage.setItem(key, value)
 }
 
 // function that creates the rows on load of the page
 createRow();
+
+// getting the value from local storage and displaying it on the page
+$('#9 .description').val(localStorage.getItem('9'))
+$('#10 .description').val(localStorage.getItem('10'))
+$('#11 .description').val(localStorage.getItem('11'))
+$('#12 .description').val(localStorage.getItem('12'))
+$('#13 .description').val(localStorage.getItem('13'))
+$('#14 .description').val(localStorage.getItem('14'))
+$('#15 .description').val(localStorage.getItem('15'))
+$('#16 .description').val(localStorage.getItem('16'))
+$('#17 .description').val(localStorage.getItem('17'))
