@@ -11,7 +11,7 @@ N/A
 
 ### Usage
 
-[Link to deployed website](https://mjkonkel.github.io/C5-work-day-scheduler/)
+[Link to deployed website](https://mjkonkel.github.io/work-day-scheduler/)
 
 >The application uses moment.js to display the current date at the top of the page.
 ![image of current date shown on the page](./assets/images/day.jpg)
